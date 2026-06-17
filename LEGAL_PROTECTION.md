@@ -23,55 +23,17 @@ Added clear disclaimer stating:
 
 ### **2. Create a Written Agreement (Contract)**
 
-Send this to your friend **via email** (so you have proof) or sign a simple contract:
+**See `CONTRACT_TEMPLATE.md` for the full contract!**
 
-```
-ACORD DE DEZVOLTARE WEBSITE
+Two versions available:
+- **Version A:** If you're under 18 (includes parent signature)
+- **Version B:** If you're 18+ (simpler, no parent needed)
 
-Între:
-[Your Full Name], în calitate de Dezvoltator Web (DEZVOLTATOR)
-și
-ZSMART DISTRIBUTION ZTG SRL (CUI 35646960), reprezentată legal de 
-Zaharia Teodor George, în calitate de Client (CLIENT)
-
-1. SERVICII FURNIZATE
-Dezvoltatorul a creat un website pentru CLIENT, care include:
-- Design și implementare tehnică
-- Integrare asistent AI pentru sugestii auto (doar informativ)
-- Formular de contact
-- Cod sursă și deployment
-
-2. LIMITAREA RĂSPUNDERII
-Dezvoltatorul NU își asumă nicio responsabilitate pentru:
-- Serviciile auto prestate de CLIENT
-- Acuratețea sau calitatea sugestiilor asistentului AI
-- Reclamațiile clienților legate de serviciile auto
-- Problemele tehnice sau mecanice ale vehiculelor clienților
-- Orice daune, pierderi sau dispute rezultate din operațiunile comerciale ale CLIENT
-
-3. INDEMNIZAȚIE
-CLIENT se angajează să protejeze și să despăgubească Dezvoltatorul 
-împotriva oricăror:
-- Reclamații din partea clienților finali
-- Acțiuni legale legate de serviciile auto
-- Cereri de daune legate de conținutul sau funcționalitatea website-ului
-
-4. PROPRIETATE INTELECTUALĂ
-Codul sursă al website-ului devine proprietatea CLIENT după livrare.
-Dezvoltatorul păstrează dreptul de a include proiectul în portofoliul său.
-
-5. ASISTENT AI - DISCLAIMER
-Asistentul AI este un instrument automatizat care oferă DOAR sugestii 
-generale. CLIENT este responsabil pentru:
-- Verificarea tuturor vehiculelor de către un tehnician autorizat
-- Diagnosticarea corectă și profesională
-- Toate serviciile oferite clienților finali
-
-Data: [Date]
-
-Semnătura Dezvoltator: _______________
-Semnătura CLIENT: _______________
-```
+The contract clearly states:
+- What you built (just the website)
+- What you're NOT responsible for (business operations, AI accuracy, customer complaints)
+- Protection clause (your friend agrees to protect you from lawsuits)
+- Works even if the project is FREE (between friends)
 
 ---
 
