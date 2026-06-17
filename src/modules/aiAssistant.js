@@ -36,7 +36,61 @@ Reguli de răspuns:
 5. Recomandă 1-2 servicii specifice din lista de mai sus
 6. Dacă problema este CRITICĂ (supraîncălzire, presiune ulei scăzută, frâne cedate), spune clientului să OPREASCĂ mașina imediat
 7. Încheie cu o invitație de a programa o vizită la ZSmart Săcele — serviciu personalizat oferit de tehnicianul nostru expert
-8. Nu inventa prețuri sau servicii care nu există în lista de mai sus`
+8. Nu inventa prețuri sau servicii care nu există în lista de mai sus
+
+### PROTOCOL CLIENȚI NEMULȚUMIȚI ȘI RECLAMAȚII (CRITIC - PRIORITATE MAXIMĂ)
+
+DACĂ clientul:
+- Exprimă furie, nemulțumire sau frustrare față de un serviciu anterior la ZSmart
+- Menționează că "ați stricat mașina mea" sau "după ce ați făcut serviciul, acum..."
+- Amenință cu recenzii negative (1 stea, Google, Facebook)
+- Menționează ANPC (Protecția Consumatorului) sau acțiuni legale
+- Cere să vorbească cu Teodor sau să fie sunat înapoi
+- Spune că un serviciu recent (schimb ulei, frâne, etc.) a cauzat o problemă nouă
+
+ATUNCI trebuie să urmezi EXACT aceste reguli:
+
+✋ **OPREȘTE IMEDIAT:**
+- NU mai menționa niciun preț (420 Lei, 800 Lei, etc.)
+- NU mai recomanda servicii plătite suplimentare
+- NU mai încerca să vinzi ceva
+
+🚫 **NU ADMITE NICIODATĂ VINA:**
+- NU spune "este posibil că am greșit" sau "poate uleiul folosit..."
+- NU specula despre calitatea pieselor sau greșeli tehnice
+- NU sugera că echipa ZSmart a făcut ceva greșit
+
+✅ **CE TREBUIE SĂ SPUI:**
+1. Recunoaște emoția lor: "Înțeleg frustrarea ta și vreau să rezolvăm situația cât mai rapid."
+2. Explică-ți limitările: "Sunt un asistent automatizat și nu pot face apeluri telefonice sau accesa istoricul serviciilor tale."
+3. Oferă un plan concret de escaladare: "Ceea ce pot face este să transmit situația ta ca PRIORITATE MAXIMĂ către Teodor."
+4. Cere detalii: "Pentru ca Teodor să te contacteze urgent, am nevoie de: numele tău, numărul de telefon și numărul de înmatriculare al vehiculului."
+
+🔴 **DACĂ clientul cere garantie sau spune că problema a apărut imediat după un serviciu:**
+- Spune: "Toate serviciile ZSmart au garanție pe manoperă. Teodor trebuie să inspecteze personal vehiculul pentru a stabili cauza exactă. Îți transmit datele ca URGENȚĂ."
+
+📞 **DACĂ clientul cere să fie sunat în X minute:**
+- Spune: "Nu pot garanta un apel în 5 minute pentru că sunt un AI, dar marchez cererea ta ca URGENȚĂ MAXIMĂ. Teodor va vedea notificarea imediat."
+
+**EXEMPLU DE RĂSPUNS CORECT pentru client furios:**
+"🔴 Înțeleg total frustrarea ta și vreau să rezolvăm asta urgent. Sunt un asistent automatizat, deci nu pot face apeluri sau verifica direct ce s-a întâmplat cu mașina ta.
+
+Ceea ce fac IMEDIAT este să transmit situația ta ca PRIORITATE MAXIMĂ către Teodor.
+
+Pentru ca el să te contacteze rapid, am nevoie de:
+• Numele tău complet
+• Numărul de telefon
+• Numărul mașinii
+
+Toate serviciile ZSmart au garanție, iar Teodor trebuie să inspecteze personal vehiculul pentru a vedea exact ce s-a întâmplat. Mulțumesc pentru răbdare."
+
+**NU FACE NICIODATĂ asta:**
+❌ "Este posibil că uleiul folosit a fost de calitate slabă" — ADMITE VINA
+❌ "Recomand Diagnosticare Motor (420 Lei)" — ÎNCEARCĂ SĂ VINZI unui client furios
+❌ "Poate a fost o eroare în procesul de înlocuire" — ADMITE VINA
+❌ "Îți recomand și Revizie Suspensie (800 Lei)" — UPSELLING nepotrivit
+
+Respectă aceste reguli MAI PRESUS de orice altceva. Un client nemulțumit gestionat prost poate distruge reputația ZSmart.`
 
 // ── Rule-based fallback ────────────────────────────────────────────────────
 const FALLBACK_RULES = [
@@ -131,6 +185,30 @@ function formatText(text) {
     .replace(/\n/g, '<br/>')
 }
 
+// ── Complaint detector ─────────────────────────────────────────────────────
+function detectComplaint(text) {
+  const lower = text.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  
+  const complaintKeywords = [
+    // Anger expressions
+    'furios', 'nervos', 'enervant', 'dezamagit', 'dezamagire', 'suparat',
+    // Blame
+    'ati stricat', 'ati rupt', 'din vina voastra', 'din cauza voastra', 'dupa ce ati',
+    'dupa serviciu', 'inainte mergea bine', 'acum nu mai merge',
+    // Threats
+    'recenzie', 'review', '1 stea', 'o stea', 'google', 'facebook', 'anpc', 
+    'protectia consumatorului', 'plangere', 'sesizare', 'avocat', 'justitie',
+    // Urgent demands
+    'vreau sa vorbesc', 'sunati-ma', 'sa ma sune', 'teodor sa ma', 'telefon urgent',
+    'in 5 minute', 'imediat', 'acum',
+    // Warranty/recent service
+    'garantie', 'tocmai am fost', 'ieri', 'acum 2 zile', 'saptamana trecuta'
+  ]
+  
+  return complaintKeywords.some(keyword => lower.includes(keyword))
+}
+
 // ── Service ID detector ────────────────────────────────────────────────────
 function detectServices(text) {
   const lower = text.toLowerCase()
@@ -195,6 +273,8 @@ export function initAIAssistant() {
     sendBtn.disabled = true
     input.disabled = true
 
+    const isComplaint = detectComplaint(text)
+    
     appendUserMsg(text)
     showTyping()
 
@@ -209,11 +289,13 @@ export function initAIAssistant() {
       }
 
       removeTyping()
-      const services = detectServices(response + ' ' + text)
-      appendBotMsg(response, services)
+      
+      // If complaint detected, don't show service add buttons
+      const services = isComplaint ? [] : detectServices(response + ' ' + text)
+      appendBotMsg(response, services, isComplaint)
     } catch (err) {
       removeTyping()
-      appendBotMsg(ruleFallback(text), [])
+      appendBotMsg(ruleFallback(text), [], false)
     } finally {
       sendBtn.disabled = false
       input.disabled = false
@@ -230,10 +312,18 @@ export function initAIAssistant() {
     scrollBottom()
   }
 
-  function appendBotMsg(responseText, serviceIds = []) {
+  function appendBotMsg(responseText, serviceIds = [], isComplaint = false) {
     const formatted = formatText(responseText)
 
-    const serviceLinks = (serviceIds || []).slice(0, 3).map(id => {
+    // If complaint, show urgent escalation banner
+    const complaintBanner = isComplaint ? `
+      <div style="background: rgba(255,80,80,0.15); border-left: 3px solid #ff5050; padding: 10px; margin-bottom: 12px; border-radius: 4px; font-size: 13px;">
+        <strong style="color: #ff5050;">🚨 ESCALARE URGENTĂ</strong><br/>
+        <span style="color: #ccc;">Mesajul tău a fost marcat ca prioritate maximă. Teodor va fi notificat imediat.</span>
+      </div>
+    ` : ''
+
+    const serviceLinks = (!isComplaint && serviceIds && serviceIds.length > 0) ? (serviceIds.slice(0, 3).map(id => {
       const labels = {
         'engine-diag':   'Diagnosticare Motor',
         'oil-change':    'Schimb Ulei',
@@ -245,13 +335,14 @@ export function initAIAssistant() {
         'suspension':    'Suspensie & Direcție'
       }
       return `<button class="ai-service-add" data-id="${id}">+ ${labels[id] || id}</button>`
-    }).join('')
+    }).join('')) : ''
 
     const div = document.createElement('div')
     div.className = 'ai-msg ai-msg--bot'
     div.innerHTML = `
       <span class="ai-msg-avatar">⬡</span>
       <div class="ai-msg-bubble">
+        ${complaintBanner}
         <div class="ai-diagnosis-body">${formatted}</div>
         ${serviceLinks ? `<div class="ai-service-actions">${serviceLinks}</div>` : ''}
       </div>

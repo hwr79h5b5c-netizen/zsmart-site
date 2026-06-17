@@ -20,6 +20,7 @@ import { initScrollAnimations } from './modules/scrollAnimations.js'
 import { initCounters } from './modules/counters.js'
 import { initProcessCanvases } from './modules/processCanvases.js'
 import { initAIAssistant } from './modules/aiAssistant.js'
+import { initContactForm } from './modules/contactForm.js'
 import { SERVICES } from './data/services.js'
 
 async function bootstrap() {
@@ -57,6 +58,9 @@ async function bootstrap() {
   // 9. Scroll + counters
   initScrollAnimations()
   initCounters()
+
+  // 10. Contact form
+  initContactForm()
 }
 
 function initReelModal() {
