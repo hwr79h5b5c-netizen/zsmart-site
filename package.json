@@ -1,0 +1,19 @@
+{
+  "name": "zsmart-agency-site",
+  "version": "1.0.0",
+  "description": "ZSmart - Immersive 3D Vehicle Services Agency Site",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "three": "^0.165.0",
+    "gsap": "^3.12.5",
+    "@gsap/react": "^2.1.1"
+  },
+  "devDependencies": {
+    "vite": "^5.3.1",
+    "@vitejs/plugin-legacy": "^5.4.1"
+  }
+}

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ZSmart Distribution ZTG SRL — Servicii auto de înaltă precizie în Săcele, județul Brașov. Distribuție și comerț auto cu experiență." />
+  <meta name="keywords" content="service auto, Săcele, Brașov, ZSmart, distribuție auto, diagnosticare, Zaharia Teodor George" />
+  <title>ZSMART Distribution ZTG SRL — Inteligență Auto de Precizie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+</head>
+<body>
+  <!-- ═══════════════════════════════════════ LOADER ═══ -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">ZS</div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+      <span class="loader-text">INIȚIALIZARE DIAGNOSTICARE</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ CURSOR ═══ -->
+  <div id="cursor"></div>
+  <div id="cursor-trail"></div>
+
+  <!-- ═══════════════════════════════════════ NAV ═══════ -->
+  <nav id="nav">
+    <div class="nav-logo">
+      <img src="/logo.svg" alt="ZSmart Distribution ZTG SRL" class="nav-logo-img" />
+    </div>
+    <div class="nav-links">
+      <a href="#services" data-nav>Servicii</a>
+      <a href="#diagnostic" data-nav>Diagnosticare</a>
+      <a href="#garage" data-nav>Garaj</a>
+      <a href="#about" data-nav>Despre Noi</a>
+      <a href="#contact" data-nav>Contact</a>
+    </div>
+    <div class="nav-cta">
+      <button class="btn-ai" id="open-ai" title="Asistent AI Auto">
+        <span class="ai-pulse"></span>⬡ Asistent AI
+      </button>
+      <button class="btn-outline" id="open-bay">Coș Servicii <span class="bay-count">0</span></button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ HERO ═══════ -->
+  <section id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow" data-reveal>INTELIGENȚĂ AUTO DE PRECIZIE · SĂCELE, BRAȘOV</div>
+      <h1 class="hero-title" data-reveal>
+        <span class="title-line">CONDUCE</span>
+        <span class="title-line accent">MAI SMART.</span>
+      </h1>
+      <p class="hero-sub" data-reveal>
+        Servicii auto de nouă generație, concepute pentru cei care cer mai mult decât obișnuitul.
+        Distribuție și comerț auto de înaltă precizie în inima județului Brașov.
+      </p>
+      <div class="hero-actions" data-reveal>
+        <button class="btn-primary" id="explore-btn">Explorează Serviciile</button>
+        <button class="btn-ghost" id="reel-btn">Vezi Prezentarea ▶</button>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>DERULEAZĂ</span>
+      <div class="scroll-line"></div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat" data-reveal><span class="stat-num" data-count="4800">0</span><span class="stat-label">Vehicule Deservite</span></div>
+      <div class="stat" data-reveal><span class="stat-num" data-count="99">0</span><span class="stat-label">% Satisfacție</span></div>
+      <div class="stat" data-reveal><span class="stat-num" data-count="1">0</span><span class="stat-label">Tehnician Expert</span></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ TAGLINE ════ -->
+  <section id="tagline-section">
+    <div class="tagline-canvas-wrap">
+      <canvas id="grid-canvas"></canvas>
+    </div>
+    <div class="tagline-text" data-reveal>
+      <p>Nu doar reparăm vehicule —</p>
+      <p class="accent-line">proiectăm performanța lor.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ SERVICES ═══ -->
+  <section id="services">
+    <div class="section-header" data-reveal>
+      <span class="section-label">// MODULE</span>
+      <h2>Arhitectura Serviciilor</h2>
+      <p>Selectează modulele de diagnosticare pentru a construi pachetul tău personalizat de servicii</p>
+    </div>
+    <div id="services-canvas-wrap">
+      <canvas id="services-canvas"></canvas>
+      <div id="service-tooltip" class="hidden">
+        <div class="tooltip-title"></div>
+        <div class="tooltip-desc"></div>
+        <div class="tooltip-price"></div>
+        <button class="tooltip-add btn-primary">Adaugă în Coș +</button>
+      </div>
+    </div>
+    <div id="service-cards" class="service-grid">
+      <!-- generat de JS -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ DIAGNOSTIC ═ -->
+  <section id="diagnostic">
+    <div class="diag-layout">
+      <div class="diag-left" data-reveal>
+        <span class="section-label">// VERIFICARE SISTEM</span>
+        <h2>Diagnosticare<br/><span class="accent">Inteligentă</span></h2>
+        <p>Suita noastră de diagnosticare citește peste 4.200 de parametri ai vehiculului în timp real, oferind o analiză precisă a defecțiunilor înainte ca mașina ta să intre în service.</p>
+        <ul class="diag-features">
+          <li><span class="feature-icon">◈</span> Scanare Profundă OBD-II</li>
+          <li><span class="feature-icon">◈</span> Analiză cu Imagistică Termică</li>
+          <li><span class="feature-icon">◈</span> Modelare Predictivă a Defecțiunilor</li>
+          <li><span class="feature-icon">◈</span> Telemetrie Live a Senzorilor</li>
+        </ul>
+        <button class="btn-primary">Programează Diagnosticarea</button>
+      </div>
+      <div class="diag-right">
+        <canvas id="diag-canvas"></canvas>
+        <div class="diag-hud">
+          <div class="hud-item"><span class="hud-label">MOTOR</span><div class="hud-bar"><div class="hud-fill" data-pct="87"></div></div><span class="hud-val">87%</span></div>
+          <div class="hud-item"><span class="hud-label">FRÂNE</span><div class="hud-bar"><div class="hud-fill" data-pct="94"></div></div><span class="hud-val">94%</span></div>
+          <div class="hud-item"><span class="hud-label">SUSPENSIE</span><div class="hud-bar"><div class="hud-fill" data-pct="72"></div></div><span class="hud-val">72%</span></div>
+          <div class="hud-item"><span class="hud-label">ELECTRIC</span><div class="hud-bar"><div class="hud-fill" data-pct="98"></div></div><span class="hud-val">98%</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ PROCESS ═════ -->
+  <section id="process">
+    <div class="section-header" data-reveal>
+      <span class="section-label">// PROTOCOL</span>
+      <h2>Procesul ZSmart</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step" data-step="01" data-reveal>
+        <div class="step-icon-wrap"><canvas class="step-canvas"></canvas></div>
+        <h3>Programare &amp; Scanare</h3>
+        <p>Programează online. Sosește. Senzorii noștri încep să citească vehiculul imediat ce intri în service.</p>
+      </div>
+      <div class="process-step" data-step="02" data-reveal>
+        <div class="step-icon-wrap"><canvas class="step-canvas"></canvas></div>
+        <h3>Diagnosticare &amp; Planificare</h3>
+        <p>Raportul complet de diagnosticare livrat pe telefon. Aprobă, modifică sau extinde pachetul de servicii.</p>
+      </div>
+      <div class="process-step" data-step="03" data-reveal>
+        <div class="step-icon-wrap"><canvas class="step-canvas"></canvas></div>
+        <h3>Execuție de Precizie</h3>
+        <p>Tehnicianul nostru master execută fiecare operațiune cu piese OEM și unelte de precizie profesionale.</p>
+      </div>
+      <div class="process-step" data-step="04" data-reveal>
+        <div class="step-icon-wrap"><canvas class="step-canvas"></canvas></div>
+        <h3>Certificat &amp; Livrat</h3>
+        <p>Scanare de verificare post-service. Certificat digital. Documentație garanție. Conduce cu încredere.</p>
+      </div>
+    </div>
+    <div class="process-line"></div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ ABOUT ═══════ -->
+  <section id="about">
+    <div class="about-layout">
+      <div class="about-left" data-reveal>
+        <span class="section-label">// DESPRE NOI</span>
+        <h2>ZSmart Distribution<br/><span class="accent">ZTG SRL</span></h2>
+        <p class="about-lead">
+          Companie înregistrată oficial în Săcele, județul Brașov, cu numărul de identificare fiscală <strong>CUI 35646960</strong>.
+          Specializată în comerț și distribuție auto, ZSmart aduce standarde europene de calitate la nivel local.
+        </p>
+        <p>
+          Fondată și condusă de <strong>Zaharia Teodor George</strong>, firma noastră operează cu transparență deplină
+          și angajament față de excelența în fiecare serviciu oferit clienților din Brașov și împrejurimi.
+        </p>
+        <div class="about-details">
+          <div class="about-detail-item">
+            <span class="detail-label">// SEDIU SOCIAL</span>
+            <span class="detail-value">Str. Anotimpurilor, Nr. 11<br/>Săcele, jud. Brașov</span>
+          </div>
+          <div class="about-detail-item">
+            <span class="detail-label">// CUI</span>
+            <span class="detail-value">35646960</span>
+          </div>
+          <div class="about-detail-item">
+            <span class="detail-label">// DENUMIRE LEGALĂ</span>
+            <span class="detail-value">ZSMART DISTRIBUTION ZTG SRL</span>
+          </div>
+          <div class="about-detail-item">
+            <span class="detail-label">// DOMENIU</span>
+            <span class="detail-value">Comerț &amp; Distribuție Auto</span>
+          </div>
+          <div class="about-detail-item">
+            <span class="detail-label">// ADMINISTRATOR</span>
+            <span class="detail-value">Zaharia Teodor George</span>
+          </div>
+          <div class="about-detail-item">
+            <span class="detail-label">// LOCAȚIE</span>
+            <span class="detail-value">Săcele, Județul Brașov, România</span>
+          </div>
+        </div>
+        <div class="about-verify">
+          <span class="detail-label" style="display:block;margin-bottom:0.75rem;">// VERIFICĂ DATE FIRMĂ</span>
+          <div class="verify-links">
+            <a href="https://listafirme.ro/zsmart-distribution-ztg-srl-35646960/" target="_blank" rel="noopener" class="verify-btn">ListaFirme.ro ↗</a>
+            <a href="https://termene.ro/firma/35646960-ZSMART-DISTRIBUTION-ZTG-SRL" target="_blank" rel="noopener" class="verify-btn">Termene.ro ↗</a>
+            <a href="https://targetare.ro/35646960/zsmart-distribution-ztg-srl" target="_blank" rel="noopener" class="verify-btn">Targetare.ro ↗</a>
+            <a href="https://www.infoquick.ro/verificare-firme/zsmart-distribution-ztg-srl-35646960" target="_blank" rel="noopener" class="verify-btn">InfoQuick.ro ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="about-right" data-reveal>
+        <canvas id="about-canvas"></canvas>
+        <div class="about-card">
+          <div class="about-card-header">
+            <span class="about-card-badge">⬡ FIRMĂ VERIFICATĂ</span>
+          </div>
+          <div class="about-card-logo">
+            <span class="logo-mark" style="font-size:3rem;">Z</span>
+            <span class="logo-text" style="font-size:1.6rem;letter-spacing:0.25em;">SMART</span>
+          </div>
+          <div class="about-card-info">
+            <div class="aci-row"><span>Denumire</span><strong>ZSmart Distribution ZTG SRL</strong></div>
+            <div class="aci-row"><span>CUI</span><strong>35646960</strong></div>
+            <div class="aci-row"><span>Județ</span><strong>Brașov</strong></div>
+            <div class="aci-row"><span>Localitate</span><strong>Săcele</strong></div>
+            <div class="aci-row"><span>Administrator</span><strong>Zaharia Teodor George</strong></div>
+            <div class="aci-row"><span>Status</span><strong class="status-active">● Activ</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ GALLERY ═════ -->
+  <section id="garage">
+    <div class="section-header" data-reveal>
+      <span class="section-label">// GARAJUL NOSTRU</span>
+      <h2>Unde Trăiește Precizia</h2>
+    </div>
+    <div class="gallery-grid" data-reveal>
+      <div class="gallery-item gi-large" style="background: var(--garage-1)">
+        <div class="gi-overlay"><span>BAY PRINCIPAL</span></div>
+      </div>
+      <div class="gallery-item gi-tall" style="background: var(--garage-2)">
+        <div class="gi-overlay"><span>DIAGNOSTICARE</span></div>
+      </div>
+      <div class="gallery-item" style="background: var(--garage-3)">
+        <div class="gi-overlay"><span>DETAILING</span></div>
+      </div>
+      <div class="gallery-item" style="background: var(--garage-4)">
+        <div class="gi-overlay"><span>UNELTE &amp; TECH</span></div>
+      </div>
+      <div class="gallery-item gi-wide" style="background: var(--garage-5)">
+        <div class="gi-overlay"><span>ZAHARIA TEODOR GEORGE</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ TESTIMONIALS ═ -->
+  <section id="testimonials">
+    <div class="section-header" data-reveal>
+      <span class="section-label">// RECENZII CLIENȚI</span>
+      <h2>Feedback Verificat</h2>
+    </div>
+    <div class="testi-track" id="testi-track">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p>„ZSmart a schimbat complet modul în care privesc întreținerea mașinii. Aplicația de diagnosticare este cu adevărat futuristă."</p><cite>— Mihai D., proprietar BMW M3</cite></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p>„Am rezervat un pachet complet de servicii în mai puțin de 2 minute. Previzualizarea 3D a ce urmează să fie reparat a fost incredibilă."</p><cite>— Andreea R., proprietară Audi Q7</cite></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p>„Tehnicianul demonstrează clar măiestria. Raportul de diagnosticare înainte/după m-a convins pe viață."</p><cite>— Ionuț T., proprietar Porsche 911</cite></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p>„Nu voi mai merge niciodată la un service auto obișnuit. ZSmart este ceea ce ar fi trebuit să fie dintotdeauna."</p><cite>— Alexandra K., proprietară Tesla Model S</cite></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p>„Specialistul din Săcele este profesionist și prompt. Cel mai bun expert auto din județul Brașov."</p><cite>— Radu M., proprietar Mercedes C63</cite></div>
+      <!-- duplicates for infinite scroll -->
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p>„ZSmart a schimbat complet modul în care privesc întreținerea mașinii. Aplicația de diagnosticare este cu adevărat futuristă."</p><cite>— Mihai D., proprietar BMW M3</cite></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p>„Am rezervat un pachet complet de servicii în mai puțin de 2 minute. Previzualizarea 3D a ce urmează să fie reparat a fost incredibilă."</p><cite>— Andreea R., proprietară Audi Q7</cite></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p>„Tehnicianul demonstrează clar măiestria. Raportul de diagnosticare înainte/după m-a convins pe viață."</p><cite>— Ionuț T., proprietar Porsche 911</cite></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p>„Nu voi mai merge niciodată la un service auto obișnuit. ZSmart este ceea ce ar fi trebuit să fie dintotdeauna."</p><cite>— Alexandra K., proprietară Tesla Model S</cite></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p>„Specialistul din Săcele este profesionist și prompt. Cel mai bun expert auto din județul Brașov."</p><cite>— Radu M., proprietar Mercedes C63</cite></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ CONTACT ══════ -->
+  <section id="contact">
+    <div class="contact-bg"><canvas id="contact-canvas"></canvas></div>
+    <div class="contact-content" data-reveal>
+      <span class="section-label">// CONTACTEAZĂ-NE</span>
+      <h2>Gata să-ți ridici<br/><span class="accent">experiența auto?</span></h2>
+      <div class="contact-info-bar">
+        <div class="cib-item">
+          <span class="cib-icon">◈</span>
+          <div>
+            <span class="cib-label">Adresă</span>
+            <span class="cib-val">Str. Anotimpurilor, Nr. 11, Săcele, jud. Brașov</span>
+          </div>
+        </div>
+        <div class="cib-item">
+          <span class="cib-icon">◈</span>
+          <div>
+            <span class="cib-label">CUI</span>
+            <span class="cib-val">35646960</span>
+          </div>
+        </div>
+        <div class="cib-item">
+          <span class="cib-icon">◈</span>
+          <div>
+            <span class="cib-label">Administrator</span>
+            <span class="cib-val">Zaharia Teodor George</span>
+          </div>
+        </div>
+      </div>
+      <form id="contact-form" class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nume Complet</label>
+            <input type="text" placeholder="Ion Popescu" required />
+          </div>
+          <div class="form-group">
+            <label>Vehicul</label>
+            <input type="text" placeholder="2023 BMW M5" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="ion@exemplu.ro" required />
+          </div>
+          <div class="form-group">
+            <label>Telefon</label>
+            <input type="tel" placeholder="+40 700 000 000" />
+          </div>
+        </div>
+        <div class="form-group full">
+          <label>Serviciu Dorit</label>
+          <textarea placeholder="Spune-ne despre nevoile vehiculului tău..." rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn-primary btn-full">
+          <span>Trimite Cererea</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ FOOTER ═══════ -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="/logo.svg" alt="ZSmart" class="footer-logo-img" />
+        <p>Inteligență Auto de Precizie.<br/>Construită pentru drumul înainte.</p>
+        <p class="footer-legal">
+          ZSMART DISTRIBUTION ZTG SRL<br/>
+          CUI: 35646960<br/>
+          Str. Anotimpurilor, Nr. 11, Săcele, jud. Brașov
+        </p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Servicii</h4>
+          <a href="#services">Diagnosticare Motor</a>
+          <a href="#services">Sisteme de Frânare</a>
+          <a href="#services">Ulei &amp; Fluide</a>
+          <a href="#services">Transmisie</a>
+          <a href="#services">Detailing</a>
+        </div>
+        <div class="footer-col">
+          <h4>Companie</h4>
+          <a href="#about">Despre ZSmart</a>
+          <a href="#about">Tehnician Expert</a>
+          <a href="https://termene.ro/firma/35646960-ZSMART-DISTRIBUTION-ZTG-SRL" target="_blank" rel="noopener">Date Firmă ↗</a>
+          <a href="https://listafirme.ro/zsmart-distribution-ztg-srl-35646960/" target="_blank" rel="noopener">ListaFirme.ro ↗</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="#contact">Str. Anotimpurilor, Nr. 11</a>
+          <a href="#contact">Săcele, jud. Brașov</a>
+          <a href="#contact">România</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ZSmart Distribution ZTG SRL · CUI 35646960 · Toate drepturile rezervate.</span>
+      <div class="footer-socials">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="LinkedIn">LI</a>
+        <a href="#" aria-label="YouTube">YT</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════ SERVICE BAY ══ -->
+  <div id="service-bay" class="bay-closed">
+    <div class="bay-header">
+      <h3>⬡ Coș Servicii</h3>
+      <button id="close-bay" aria-label="Închide">✕</button>
+    </div>
+    <canvas id="bay-canvas"></canvas>
+    <div id="bay-items" class="bay-items-list"></div>
+    <div class="bay-footer">
+      <div class="bay-total"><span>Total</span><span id="bay-price">0 Lei</span></div>
+      <button class="btn-primary btn-full" id="checkout-btn">Rezervă &amp; Confirmă →</button>
+    </div>
+  </div>
+  <div id="bay-backdrop"></div>
+
+  <!-- ═══════════════════════════════════════ VIDEO MODAL ══ -->
+  <div id="reel-modal" class="modal-closed">
+    <div class="modal-backdrop" id="reel-backdrop"></div>
+    <div class="modal-box">
+      <button class="modal-close" id="close-reel">✕</button>
+      <div class="modal-inner">
+        <span class="section-label">// PREZENTARE ZSMART</span>
+        <h3>Videoclip în curând</h3>
+        <p>Prezentarea video a serviciilor ZSmart Distribution ZTG SRL va fi disponibilă în curând.<br/>Între timp, explorează serviciile noastre sau contactează-ne direct.</p>
+        <button class="btn-primary" id="reel-to-contact">Contactează-ne →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ AI ASSISTANT ══ -->
+  <div id="ai-panel" class="ai-closed">
+    <div class="ai-header">
+      <div class="ai-header-left">
+        <div class="ai-avatar">
+          <span class="ai-avatar-icon">⬡</span>
+          <span class="ai-pulse-ring"></span>
+        </div>
+        <div>
+          <div class="ai-name">ZSMART AI</div>
+          <div class="ai-status">● Online — Asistent Auto</div>
+        </div>
+      </div>
+      <button id="close-ai" aria-label="Închide">✕</button>
+    </div>
+
+    <div class="ai-messages" id="ai-messages">
+      <div class="ai-msg ai-msg--bot">
+        <span class="ai-msg-avatar">⬡</span>
+        <div class="ai-msg-bubble">
+          Bună! Sunt asistentul AI ZSmart. Descrie-mi problema mașinii tale — sunete ciudate, lumini de avertizare, comportament anormal — și îți voi spune ce ar putea fi și ce serviciu recomanzi. 🔧
+        </div>
+      </div>
+      <div class="ai-msg ai-msg--bot">
+        <span class="ai-msg-avatar">⬡</span>
+        <div class="ai-msg-bubble ai-suggestions">
+          <p class="ai-sug-label">Sau alege un simptom rapid:</p>
+          <div class="ai-chips">
+            <button class="ai-chip" data-q="Motorul face zgomot la pornire">🔊 Zgomot motor</button>
+            <button class="ai-chip" data-q="S-a aprins martorul de motor">⚠️ Martor motor</button>
+            <button class="ai-chip" data-q="Mașina frânează greu sau vibrez la frânare">🛑 Probleme frâne</button>
+            <button class="ai-chip" data-q="Mașina consumă prea mult ulei">🛢️ Consum ulei mare</button>
+            <button class="ai-chip" data-q="Mașina vibrează la viteză mare">〰️ Vibrații</button>
+            <button class="ai-chip" data-q="Climatizarea nu mai răcește">❄️ AC defect</button>
+            <button class="ai-chip" data-q="Mașina trage într-o parte">↗️ Trage într-o parte</button>
+            <button class="ai-chip" data-q="Schimbătorul de viteze intră greu">⚙️ Viteze greoaie</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-input-row">
+      <input
+        type="text"
+        id="ai-input"
+        placeholder="Descrie problema mașinii tale..."
+        autocomplete="off"
+        aria-label="Mesaj asistent AI"
+      />
+      <button id="ai-send" aria-label="Trimite">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div id="ai-backdrop"></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
