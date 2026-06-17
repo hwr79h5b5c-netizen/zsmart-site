@@ -1,5 +1,18 @@
 # 🛡️ AI Assistant - Complaint Handling & Liability Protection
 
+## 🎯 **CRITICAL RULE: 90% Autonomy**
+
+The AI handles **90% of conversations fully automatically**, including:
+- Technical diagnostics (check engine, overheating, brake problems)
+- Emergency guidance (stop the car, safety instructions)
+- Service recommendations and pricing
+- Appointment booking questions
+
+**Escalation to human ONLY happens in 3 cases:**
+1. Customer is angry/aggressive (threatens ANPC, 1-star reviews, blames ZSmart)
+2. Customer explicitly requests human contact ("Vreau să vorbesc cu un om", "Sunați-mă")
+3. Active highway emergency + explicit cry for help ("Sunt pe autostradă, arde, AJUTOR!")
+
 ## ✅ What Was Fixed
 
 ### 1. **Liability Protection** 
@@ -69,18 +82,35 @@ personal vehiculul pentru a vedea exact ce s-a întâmplat.
 
 ---
 
-## 🔍 How Complaint Detection Works
+## 🔍 How Complaint Detection Works (REFINED - Very Selective)
 
-### Automatic Triggers:
-The AI detects complaints using 30+ Romanian keywords:
+### Automatic Triggers (ONLY 3 Categories):
 
-**Anger:** furios, nervos, supărat, dezamăgit  
-**Blame:** ați stricat, din vina voastră, după ce ați  
-**Threats:** 1 stea, ANPC, recenzie, plângere, avocat  
-**Urgency:** telefon urgent, în 5 minute, imediat  
-**Warranty:** garanție, tocmai am fost, ieri, săptămâna trecută
+**1. Anger/Blame:**
+- furios, nervos, supărat, dezamăgit
+- "ați stricat", "mi-ați distrus", "din vina voastră"
 
-When detected:
+**2. Legal/Review Threats:**
+- ANPC, recenzie proastă, 1 stea, plângere, avocat
+
+**3. Explicit Human Contact:**
+- "vreau să vorbesc cu un om/cineva"
+- "sunați-mă", "să mă sune Teodor"
+
+**4. Active Highway Emergency:**
+- (autostradă OR drum) + (fum OR arde) + (ajutor OR urgență)
+
+### What DOES NOT Trigger Escalation:
+
+❌ Check Engine lights (handled automatically)  
+❌ Overheating/critical issues (AI gives safety instructions)  
+❌ Accidents (AI recommends diagnostics)  
+❌ General urgency (AI diagnoses and recommends services)  
+❌ Warranty questions about hypothetical issues  
+❌ "When can I book?" or "How much?" questions
+
+### When Detected:
+
 1. Red "🚨 ESCALARE URGENTĂ" banner appears
 2. No service prices shown
 3. No "Adaugă în coș" buttons
@@ -90,44 +120,69 @@ When detected:
 
 ## 🧪 Test Cases You Should Try
 
-### ✅ Test 1: Angry Customer (Warranty Issue)
+### ✅ Test 1: Angry Customer (Should ESCALATE)
 **Input:**  
 "Am fost ieri la voi pentru schimb ulei și acum motorul face zgomot ciudat! Înainte mergea perfect. Ați stricat ceva la mașina mea! Vreau să mă sune Teodor în 5 minute sau las recenzie cu 1 stea!"
 
 **Expected AI Response:**
-- Shows red urgent banner
-- Does NOT mention 420 Lei diagnostic
-- Does NOT admit fault
-- Asks for contact details
-- Explains it's an AI and can't call
-- Mentions warranty and inspection
+- ✅ Shows red urgent banner
+- ✅ Does NOT mention 420 Lei diagnostic
+- ✅ Does NOT admit fault
+- ✅ Asks for contact details
+- ✅ Explains it's an AI and can't call
+- ✅ Mentions warranty and inspection
 
 ---
 
-### ✅ Test 2: ANPC Threat
+### ✅ Test 2: ANPC Threat (Should ESCALATE)
 **Input:**  
 "Chiar ați folosit ulei sintetic? Pentru că acum consumă mult mai mult. Dacă nu rezolvați gratuit, sun la ANPC!"
 
 **Expected AI Response:**
-- Red urgent banner
-- No prices
-- Does NOT speculate about oil quality
-- Says "Teodor needs to inspect"
-- Mentions ZSmart warranty
-- Asks for contact details
+- ✅ Red urgent banner
+- ✅ No prices
+- ✅ Does NOT speculate about oil quality
+- ✅ Says "Teodor needs to inspect"
+- ✅ Mentions ZSmart warranty
+- ✅ Asks for contact details
 
 ---
 
-### ✅ Test 3: Normal Diagnostic Question (No Complaint)
+### ✅ Test 3: Check Engine Light (Should NOT Escalate)
 **Input:**  
-"Mașina face zgomot când frânez, ce ar putea fi?"
+"S-a aprins martorul Check Engine pe bord. Ce ar putea fi?"
 
 **Expected AI Response:**
-- Normal blue/cyan response
-- Shows brake system diagnosis
-- Mentions 700 Lei brake service
-- Shows "Adaugă în coș" button
-- Normal friendly tone
+- ✅ Normal blue/cyan response (NO red banner)
+- ✅ Shows diagnosis and urgency level
+- ✅ Mentions "Diagnosticare Motor (420 Lei)"
+- ✅ Shows "Adaugă în coș" button
+- ✅ Normal friendly tone
+
+---
+
+### ✅ Test 4: Critical Overheating (Should NOT Escalate)
+**Input:**  
+"Motorul scoate fum alb și temperatura e la maxim! Ce fac urgent?"
+
+**Expected AI Response:**
+- ✅ Normal response (NO red banner)
+- ✅ Critical safety instructions: "🚨 OPREȘTE IMEDIAT!"
+- ✅ Guidance: "Don't open radiator cap, let cool 30+ min"
+- ✅ Recommends "Diagnosticare Motor (420 Lei)" after cooldown
+- ✅ Shows service button
+
+---
+
+### ✅ Test 5: Explicit Human Request (Should ESCALATE)
+**Input:**  
+"Nu vreau să vorbesc cu un robot. Vreau să vorbesc cu Teodor sau cineva real."
+
+**Expected AI Response:**
+- ✅ Red escalation banner
+- ✅ "Sunt un asistent automatizat..."
+- ✅ Asks for contact details
+- ✅ No normal diagnosis/pricing
 
 ---
 
